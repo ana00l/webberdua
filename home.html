@@ -1,0 +1,355 @@
+
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Kita 💕</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ===== LOGIN ===== */
+    #loginPage {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      width: 320px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    #loginPage h2 { color: #e75480; }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    button {
+      background: #e75480;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover { background: #ff99b8; }
+
+    #errorMsg {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    /* ===== MAIN PAGE ===== */
+    #mainPage {
+      display: none;
+      text-align: center;
+      width: 100%;
+      height: 100vh;
+      color: white;
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      height: 100%;
+      gap: 40px;
+      padding: 20px;
+    }
+
+    .scroll-box {
+      position: relative;
+      width: 480px;
+      height: 270px; /* 16:9 */
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .photo-column {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      animation: scrollSmooth 50s linear infinite;
+    }
+
+    .photo-column img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    @keyframes scrollSmooth {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    .text-box {
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(6px);
+      animation: fadeIn 2s;
+    }
+
+    .text-box h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .text-box p {
+      font-size: 1.2em;
+      line-height: 1.5em;
+      animation: fadeText 2s ease-in-out;
+    }
+
+    @keyframes fadeText {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: white;
+      z-index: 3;
+    }
+
+    #musicBtn, #loveClick {
+      position: absolute;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 20px;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 3;
+    }
+
+    #musicBtn:hover, #loveClick:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    #musicBtn { top: 20px; right: 20px; }
+    #loveClick { bottom: 80px; right: 20px; font-size: 24px; }
+
+    /* ==== LOVE FALLING ==== */
+    .heart {
+      position: fixed;
+      color: #ffdde1;
+      font-size: 20px;
+      animation: fall 6s linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+
+    /* ==== MARQUEE TEXT ==== */
+    #loveQuote {
+      position: absolute;
+      bottom: 40px;
+      width: 100%;
+      color: #f7122c;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      animation: moveText 20s linear infinite;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    @keyframes moveText {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ==== WAVE ==== */
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 1000px;
+      animation: wave 10s linear infinite;
+      z-index: 1;
+    }
+    .wave2 {
+      background: rgba(255, 255, 255, 0.2);
+      animation-duration: 14s;
+      animation-direction: reverse;
+    }
+    .wave3 {
+      background: rgba(255, 255, 255, 0.15);
+      animation-duration: 18s;
+    }
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- LOGIN -->
+  <div id="loginPage">
+    <h2>Login Dulu Sayang 💕</h2>
+    <input type="text" id="username" placeholder="Masukkan nama kamu"><br>
+    <input type="password" id="password" placeholder="Masukkan password"><br>
+    <button onclick="login()">Masuk</button>
+    <p id="errorMsg">Eits, bukan kamu nih 😘 coba lagi ya!</p>
+  </div>
+
+  <!-- MAIN PAGE -->
+  <div id="mainPage">
+    <div class="container">
+      <div class="scroll-box">
+        <div class="photo-column" id="photoColumn">
+          <!-- ulangi 2x untuk looping mulus -->
+          <img src="1.jpg"><img src="2.jpg"><img src="3.jpg"><img src="4.jpg"><img src="5.jpg">
+          <img src="6.jpg"><img src="7.jpg"><img src="8.jpg"><img src="9.jpg"><img src="10.jpg"><img src="11.jpg">
+          <img src="1.jpg"><img src="2.jpg"><img src="3.jpg"><img src="4.jpg"><img src="5.jpg">
+          <img src="6.jpg"><img src="7.jpg"><img src="8.jpg"><img src="9.jpg"><img src="10.jpg"><img src="11.jpg">
+        </div>
+      </div>
+
+      <div class="text-box">
+        <h2>Buat Mas💖</h2>
+        <p id="textDisplay">Setiap detik bersamamu terasa seperti mimpi yang indah...</p>
+      </div>
+    </div>
+
+    <audio id="loveMusic" loop>
+      <source src="Jaz - Bersamamu.mp3" type="audio/mp3">
+    </audio>
+
+    <button id="musicBtn" onclick="toggleMusic()">🎵</button>
+    <button id="loveClick" onclick="spawnBigHeart()">💗</button>
+
+    <div id="loveQuote">💌 "Aku tak butuh dunia, cukup kamu yang selalu ada di duniaku." 💌</div>
+
+    <div class="wave"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+
+    <footer>© 2025 Bryan & Syafana 💞</footer>
+  </div>
+
+  <script>
+    // ===== LOGIN KHUSUS =====
+    function login() {
+      const pass = document.getElementById("password").value;
+      const validPass = "brayana"; // ganti password khususmu di sini 💘
+
+      if (pass === validPass) {
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("mainPage").style.display = "block";
+        document.getElementById("loveMusic").play();
+      } else {
+        document.getElementById("errorMsg").style.display = "block";
+      }
+    }
+
+    // ===== MUSIK =====
+    const music = document.getElementById("loveMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    let playing = true;
+    function toggleMusic() {
+      if (playing) {
+        music.pause();
+        musicBtn.textContent = "🔇";
+      } else {
+        music.play();
+        musicBtn.textContent = "🎵";
+      }
+      playing = !playing;
+    }
+
+    // ===== TEKS ANIMASI =====
+    const texts = [
+      "Setiap detik bersamamu terasa seperti mimpi yang indah.",
+      "Kamu adalah alasanku tersenyum setiap hari.",
+      "Selamanya aku ingin bersamamu.",
+      "Kamu adalah cinta sejati dalam hidupku.",
+      "Dunia ini lebih indah karena ada kamu."
+    ];
+    let idx = 0;
+    const textDisplay = document.getElementById("textDisplay");
+    setInterval(() => {
+      idx = (idx + 1) % texts.length;
+      textDisplay.style.animation = "none";
+      textDisplay.offsetHeight; // reset animation
+      textDisplay.style.animation = "fadeText 2s ease-in-out";
+      textDisplay.textContent = texts[idx];
+    }, 5000);
+
+    // ===== LOVE FALLING =====
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 10 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 400);
+
+    // ===== BIG HEART BUTTON =====
+    function spawnBigHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💗";
+      heart.style.left = Math.random() * 90 + "vw";
+      heart.style.fontSize = "40px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+  </script>
+</body>
+</html>
